@@ -1,0 +1,94 @@
+=== PAGE 1 ===
+ANKUR PAL
+Data Analyst | SQL · Python · Power BI · Tableau · Snowflake
++91 8299098405  |  palankurhs1998@gmail.com  |  Lucknow, India
+LinkedIn  |  GitHub  |  HackerRank
+PROFESSIONAL SUMMARY
+Data Analyst with 2.8+ years of hands-on experience in data validation, SQL, ETL/ELT workflows, database testing, CRM 
+integrations, and business intelligence reporting. Skilled in cleaning, transforming, reconciling, and analyzing data using SQL, Python, 
+Excel, Power BI, and Tableau. Hands-on with SQL Server and Snowflake, HubSpot CRM/API integrations, Airbyte, Skyvia, 
+forecasting, and dashboard development, with a strong focus on data accuracy, data quality, and actionable business insights.
+TECHNICAL SKILLS
+Analytics & BI: Power BI (DAX, Power Query), Tableau, Excel (advanced formulas), KPI Development, Dashboarding, A/B Testing, 
+ARIMA Forecasting
+Programming: Python (Pandas, NumPy, Matplotlib, Seaborn), SQL
+Databases: SQL Server, Snowflake, PostgreSQL, MySQL, SQLite
+SQL & Data Quality: Joins, CTEs, Subqueries, Stored Procedures, Indexes, Query Optimization, Database Testing, Data Validation, 
+Data Cleaning, Data Transformation, Reconciliation
+Data Engineering & Integration: ETL/ELT Pipelines, Airbyte, Skyvia, HubSpot CRM, HubSpot API, REST APIs
+Tools & Frameworks: Git, Docker, Flask, FastAPI, VS Code, SSMS
+PROFESSIONAL EXPERIENCE
+Data Analyst Intern | Pahal Horizon
+Apr 2025 – Oct 2025 | Contract, Remote
+• Built Python and SQL pipelines handling 10,000+ daily records and reduced processing time from approximately 8 minutes to 3 
+minutes through index tuning and partition pruning.
+• Developed ARIMA time-series models to forecast journal activity, using ADF tests for stationarity and ACF/PACF plots for model 
+selection and validation.
+• Designed a scheduling dashboard from forecast outputs to support planning and event-participation decisions across operating 
+cycles.
+Data Validation Representative (Data Engineering & BI) | Codvo.AI
+Jan 2024 – Mar 2025 | Remote
+• Worked with data received through SQL-based pipelines, processing and loading incoming datasets into an internal data 
+validation tool for downstream quality checks and validation activities.
+• Performed data cleaning, validation, transformation, and reconciliation in Excel using advanced formulas to identify missing 
+values, duplicates, mismatches, and inconsistent records.
+• Worked extensively with SQL Server to execute, test, and optimize queries on incoming data using joins, CTEs, stored 
+procedures, indexes, subqueries, and query-optimization techniques.
+• Performed database testing through custom SQL queries to verify data accuracy, completeness, consistency, and expected 
+business logic.
+• Built Power BI reports and dashboards to visualize project data, KPIs, trends, and validation results for business and internal 
+stakeholders.
+• Supported CRM data integration workflows using HubSpot, Airbyte, Skyvia, and SQL Server, including data extraction, validation, 
+synchronization, and movement between source systems and HubSpot.
+• Worked with API integrations to fetch sales and CRM data from HubSpot Sales Hub for downstream processing and reporting 
+requirements.
+• Worked with Snowflake for connection setup and SQL query execution, with exposure to Snowflake architecture, databases, 
+schemas, warehouses, and cloud data-warehouse concepts.
+• Received the Rising Beacon Award in Jul 2024 for contributions to project delivery and data-related work.
+Associate Frontend Engineer | AskGalore Digital India Pvt Ltd
+Jul 2023 – Jan 2024 | Bhopal
+• Designed and conducted A/B tests on AskGalore.com (Next.js, React, Tailwind) that increased click-through rates by 12%, with 
+data-backed results adopted by the product team for UI decisions.
+• Designed Power BI dashboards for client businesses (Charcoal Eats, BBurger) tracking sales revenue trends, order volumes, 
+and peak-hour traffic patterns from Wix Stores transaction data — enabling data-driven inventory and staffing decisions that 
+reduced operational waste by an estimated 15%.
+• Developed a Python automation utility (scikit-image, Pillow, pdf2image) to convert PDFs into auto-corrected images, eliminating 
+90% of manual corrections and streamlining document processing workflows.
+• Built client websites (Strategii At Work, Charcoal Eats, BBurger) on Wix with Velo scripting, SEO optimization, and Wix Stores 
+payment setup — driving a 25% increase in monthly sales revenue.
+
+=== PAGE 2 ===
+Freelance Data Analytics Consultant | Independent Projects
+Oct 2022 – Jun 2023 | Remote
+• Built Python/SQL data workflows and Power BI dashboards across retail, healthcare, and digital-marketing domains — 
+transforming raw operational data into structured reporting layers. 
+• Analyzed delivery-route inefficiencies, resource-utilization gaps, and business performance trends — delivering actionable insights 
+that supported better reporting and resource-allocation decisions.
+KEY PROJECTS
+IPL Ball-by-Ball & Time-Series Intelligence · Python · SQL · Streamlit · Power BI · ARIMA · Oct 2026
+• Ingested and transformed 283,000+ ball-by-ball deliveries and 1,193 matches (2008–2026) into an SQLite warehouse; proved via 
+hypothesis testing that the toss-win advantage evaporated post-2016 (p=0.011→p=0.115) as teams shifted to chasing (+26.8%).
+• Modeled phase-wise scoring trajectories using ARIMA time-series (Powerplay, Middle, Death Overs) with ADF stationarity 
+(p<0.05) and Ljung-Box white noise tests (p>0.99), capturing the 2023–2026 Impact Player rule explosion (death overs surging 
+past 12.8+ rpo).
+E-Commerce Revenue Segmentation · Python · SQL · Tableau · August 2026
+• Engineered RFM quintile segmentation across 116,967 Brazilian e-commerce orders (R$ 46.9M GMV) using SQL CTEs and 
+NTILE(5) window ranking, revealing the top customer tier generated 72.4% of total revenue.
+• Discovered a 2.3× – 3.1× churn risk multiplier among VIP customers experiencing delivery delays (causing CSAT ratings to plunge 
+from 4.79 to 1.45 stars); designed an executive Tableau dashboard with 25+ LOD calculations and regional logistics heatmaps.
+HR Attrition Risk Dashboard · Python · SQL · Power BI · Scikit-Learn · June 2026
+• Architected a Kimball Star Schema data warehouse in SQLite and trained a Scikit-Learn logistic regression pipeline across 1,470 
+employee records, achieving 86.1% holdout accuracy and 0.84 ROC-AUC.
+• Identified via odds-ratio analysis (4.14×) that overtime workers earning below-median salary faced a 3.40× attrition spike (43.1% 
+vs 12.7% baseline); engineered 28 DAX measures in Power BI surfacing $12.6M in turnover financial exposure and department 
+flight-risk indices.
+Oct 2025 – Present: Self-directed portfolio development focused on advanced SQL, business analytics, data modeling, forecasting, and cloud 
+data architecture.
+CERTIFICATIONS
+• SQL (Intermediate) & SQL (Basic) Certified – HackerRank | 4-Star Badge
+• Python (Basic) Certified – HackerRank | 4-Star Badge
+• Power BI, Tableau, Python & SQL Certification – Skill-Lync Academy | Dec 2022 – May 2023
+• Rising Beacon Award – Codvo.AI | Jul 2024
+EDUCATION
+B.Tech, Civil Engineering | Babu Banarasi Das Northern India Institute of Technology, Lucknow | 2017 – 2021
+

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Technical Project Showcase & Case Studies — Ankur Pal, Data Analyst. Machine Learning, Kimball Star Schema, SQL Window Functions, Power BI, and Tableau.">
+    <title>Technical Project Showcase — Ankur Pal · Data Analyst</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .showcase-header-hero {
+            padding: 130px 0 50px;
+            text-align: center;
+            position: relative;
+        }
+        .filter-ribbon {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 36px 0 48px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+        .showcase-project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            margin-bottom: 48px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            transition: var(--transition);
+        }
+        .showcase-project-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-lg);
+        }
+        @media (max-width: 992px) {
+            .showcase-project-card {
+                grid-template-columns: 1fr;
+            }
+        }
+        .showcase-visual-col {
+            background: #0b0f19;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            border-right: 1px solid var(--border);
+        }
+        @media (max-width: 992px) {
+            .showcase-visual-col {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+        }
+        .showcase-main-img-box {
+            width: 100%;
+            height: 340px;
+            background: #000;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .showcase-main-img-box img {
+            max-height: 100%;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        .showcase-thumbs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        .showcase-thumb-chip {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+        .showcase-thumb-chip:hover,
+        .showcase-thumb-chip.active {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: var(--accent-blue);
+            color: var(--text-primary);
+        }
+        .showcase-info-col {
+            padding: 36px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .showcase-metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 14px;
+        }
+        .showcase-meta-list {
+            margin: 16px 0 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .showcase-meta-list li {
+            position: relative;
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+        .showcase-meta-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+        .code-snippet-box {
+            background: #080b12;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: #93c5fd;
+            margin: 14px 0;
+            overflow-x: auto;
+        }
+        .pipeline-flow-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            margin: 60px 0;
+        }
+        .pipeline-steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 28px;
+        }
+        .pipeline-step-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            text-align: center;
+        }
+        .pipeline-step-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-family: var(--font-mono);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav scrolled" id="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-bracket">&lt;</span>AP<span class="logo-bracket"> /&gt;</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#experience">Experience</a></li>
+                <li><a href="index.html#projects">Featured Work</a></li>
+                <li><a href="showcase.html" style="color: var(--text-primary); font-weight: 600;">Showcase Hub</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <a href="assets/resume/Ankur_Pal_Resume.pdf" target="_blank" class="btn btn-secondary btn-sm" style="padding: 8px 16px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Resume
+                </a>
+                <a href="index.html" class="btn btn-primary btn-sm">
+                    ← Main Portfolio
+                </a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Showcase Hero Header -->
+    <header class="showcase-header-hero">
+        <div class="hero-bg-grid"></div>
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="container">
+            <div class="hero-badge animate-fade-up">
+                <span class="badge-dot"></span>
+                Technical Architecture &amp; Empirical Case Studies
+            </div>
+            <h1 class="hero-title animate-fade-up delay-1" style="font-size: 2.75rem; margin-top: 14px;">
+                Data Analyst <span class="gradient-text">Project Showcase</span>
+            </h1>
+            <p class="hero-description animate-fade-up delay-2" style="max-width: 720px; margin: 16px auto 0;">
+                Comprehensive technical breakdowns of three production data engineering, econometric modeling, 
+                and decision intelligence projects — featuring Kimball star schemas, statistical significance tests, and live web apps.
+            </p>
+
+            <!-- Filter Ribbon -->
+            <div class="filter-ribbon animate-fade-up delay-3">
+                <button class="filter-btn active" onclick="filterShowcase('all', this)">All Projects (3)</button>
+                <button class="filter-btn" onclick="filterShowcase('ml', this)">Machine Learning &amp; Econometrics</button>
+                <button class="filter-btn" onclick="filterShowcase('sql', this)">Cloud Warehousing &amp; SQL</button>
+                <button class="filter-btn" onclick="filterShowcase('bi', this)">Executive BI &amp; Dashboards</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Showcase List -->
+    <main class="container">
+
+        <!-- Showcase Project 1: HR Attrition -->
+        <article class="showcase-project-card animate-fade-up" data-category="ml sql bi">
+            <div class="showcase-visual-col">
+                <div class="showcase-main-img-box">
+                    <img id="showcaseImg1" src="assets/projects/hr-attrition/02_overtime_income_cohort_risk.png" alt="HR Attrition Cohort Matrix">
+                </div>
+                <div class="showcase-thumbs">
+                    <button class="showcase-thumb-chip active" onclick="changeShowcaseImg('showcaseImg1', 'assets/projects/hr-attrition/02_overtime_income_cohort_risk.png', this)">
+                        Cohort Risk Matrix
+                    </button>
+                    <button class="showcase-thumb-chip" onclick="changeShowcaseImg('showcaseImg1', 'assets/projects/hr-attrition/04_feature_odds_ratios.png', this)">
+                        Feature Odds Ratios
+                    </button>
+                    <button class="showcase-thumb-chip" onclick="changeShowcaseImg('showcaseImg1', 'assets/projects/hr-attrition/03_logistic_regression_roc_pr_curve.png', this)">
+                        ROC-AUC Curve
+                    </button>
+                    <button class="showcase-thumb-chip" onclick="changeShowcaseImg('showcaseImg1', 'assets/projects/hr-attrition/05_department_risk_heatmap.png', this)">
+                        Department Heatmap
+                    </button>
+                </div>
+                <div class="code-snippet-box">
+                    -- Sample Star Schema Query: High-Risk Cohort Identification<br>
+                    SELECT d.DepartmentName, r.JobRoleTitle,<br>
+                    &nbsp;&nbsp;COUNT(f.EmployeeID) AS TotalHeadcount,<br>
+                    &nbsp;&nbsp;ROUND(AVG(f.AttritionPredictedProb) * 100, 1) AS AvgFlightRiskPct<br>
+                    FROM FactEmployeeRetention f<br>
+                    JOIN DimDepartment d ON f.DepartmentKey = d.DepartmentKey<br>
+                    JOIN DimJobRole r ON f.JobRoleKey = r.JobRoleKey<br>
+                    WHERE f.OverTimeFlag = 1 AND f.MonthlyIncome &lt; 4919<br>
+                    GROUP BY 1, 2 ORDER BY AvgFlightRiskPct DESC;
+                </div>
+            </div>
+            <div class="showcase-info-col">
+                <div>
+                    <span class="project-category-tag">Case Study 01 · People Analytics</span>
+                    <h2 class="project-title" style="font-size: 1.5rem; margin-top: 4px;">Employee Attrition Risk Intelligence Dashboard</h2>
+                    <p class="project-description" style="margin-top: 10px;">
+                        Enterprise employee retention system evaluating <strong>1,470 employees</strong>. 
+                        Discovered that employees working overtime who earn below median income experience a 
+                        <strong>3.40× empirical risk surge</strong> (43.1% departure rate vs 12.7% baseline peers). 
+                        Above-median pay cuts overtime departure down to 24.7%, acting as a 43% attrition buffer.
+                    </p>
+
+                    <div class="showcase-metrics-grid">
+                        <div class="mini-stat">
+                            <span class="mini-stat-val text-accent-blue">86.05%</span>
+                            <span class="mini-stat-label">Holdout Acc</span>
+                        </div>
+                        <div class="mini-stat">
+                            <span class="mini-stat-val text-accent-cyan">0.84</span>
+                            <span class="mini-stat-label">ROC-AUC</span>
+                        </div>
+                        <div class="mini-stat">
+                            <span class="mini-stat-val text-accent-purple">3.40×</span>
+                            <span class="mini-stat-label">Risk Spike</span>
+                        </div>
+                    </div>
+
+                    <ul class="showcase-meta-list">
+                        <li><strong>Econometric Model:</strong> Scikit-Learn Logistic Regression with L2 regularization &amp; odds ratio interpretability.</li>
+                        <li><strong>Statistical Significance:</strong> Chi-square test on Overtime &times; Low-Income cohort (&chi;&sup2; = 126.8, p &lt; 10&supmin;&sup2;&sup5;).</li>
+                        <li><strong>Data Architecture:</strong> SQLite dimensional Star Schema with <code>FactEmployeeRetention</code> and normalized dimensions.</li>
+                        <li><strong>Power BI Reporting:</strong> 25+ DAX measures evaluating departmental flight risk and $12.6M replacement liability exposure.</li>
+                    </ul>
+                </div>
+
+                <div class="project-actions" style="margin-top: 24px;">
+                    <a href="projects/hr-attrition/index.html" target="_blank" class="btn btn-primary btn-sm">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                        Launch Interactive Dashboard ↗
+                    </a>
+                    <a href="https://github.com/ank-pal/hr-attrition-risk-dashboard" target="_blank" rel="noopener" class="btn btn-secondary-outline btn-sm">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        GitHub Repository
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Showcase Project 2: E-Commerce Revenue Segmentation -->
+        <article class="showcase-project-card animate-fade-up" data-category="sql bi">
+            <div class="showcase-visual-col">
+                <div class="showcase-main-img-box">
+                    <img id="showcaseImg2" src="assets/projects/ecommerce-revenue/churn_sensitivity_by_tier.png" alt="Customer Churn Sensitivity">
+                </div>
+                <div class="showcase-thumbs">
+                    <button class="showcase-thumb-chip active" onclick="changeShowcaseImg('showcaseImg2', 'assets/projects/ecommerce-revenue/churn_sensitivity_by_tier.png', this)">
+                        Churn Sensitivity
+                    </button>
+                    <button class="showcase-thumb-chip" onclick="changeShowcaseImg('showcaseImg2', 'assets/projects/ecommerce-revenue/rfm_revenue_distribution.png', this)">
+                        Pareto RFM Revenue
+                    </button>
+                </div>
+                <div class="code-snippet-box">
+                    -- SQL NTILE(5) Window Functions for Pareto RFM Scoring<br>
+                    WITH CustomerAgg AS (<br>
+                    &nbsp;&nbsp;SELECT customer_unique_id,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;JULIANDAY('2018-10-17') - JULIANDAY(MAX(order_purchase_timestamp)) AS Recency,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;COUNT(DISTINCT order_id) AS Frequency,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;SUM(payment_value) AS Monetary<br>
+                    &nbsp;&nbsp;FROM FactOrders GROUP BY 1<br>
+                    )<br>
+                    SELECT customer_unique_id,<br>
+                    &nbsp;&nbsp;NTILE(5) OVER (ORDER BY Recency DESC) AS R_Score,<br>
+                    &nbsp;&nbsp;NTILE(5) OVER (ORDER BY Frequency ASC) AS F_Score,<br>
+                    &nbsp;&nbsp;NTILE(5) OVER (ORDER BY Monetary ASC) AS M_Score<br>
+                    FROM CustomerAgg;
+                </div>
+            </div>
+            <div class="showcase-info-col">
+                <div>
+                    <span class="project-category-tag">Case Study 02 · Customer Intelligence &amp; Logistics</span>
+                    <h2 class="project-title" style="font-size: 1.5rem; margin-top: 4px;">E-Commerce Revenue Segmentation &amp; Regional Logistics</h2>
+                    <p class="project-description" style="margin-top: 10px;">
+                        Analyzed <strong>116,967 delivered orders</strong> across <strong>94,200 unique customers</strong> from Brazil's Olist ecosystem. 
+                        Proved that the top 20% of revenue contributors (Champions) exhibit <strong>2.1× higher churn sensitivity</strong> to shipping delays 
+                        than low-frequency discount shoppers, turning logistics delivery SLA into a primary customer retention driver.
+                    </p>
+
+                    <div class="showcase-metrics-grid">
+                        <div class="mini-stat">
+                            <span class="mini-stat-val text-accent-blue">116.9K</span>
+                            <span class="mini-stat-label">Orders</span>
+                        </div>
+                        <div class="mini-stat">
+                            <span class="mini-stat-val text-accent-cyan">R$15.8M</span>
+                            <span class="mini-stat-label">GMV</span>
+                        </div>
+                        <div class="mini-stat">
+                            <span class="mini-stat-val text-accent-purple">2.1×</span>
+                            <span class="mini-stat-label">VIP Sensitivity</span>
+                        </div>
+                    </div>
+
+                    <ul class="showcase-meta-list">
+                        <li><strong>Pareto Concentration:</strong> Champions &amp; Loyalists generate over 56% of total revenue.</li>
+                        <li><strong>Geographic Disparity:</strong> Northern regions face up to 28-day transit times; Southeast hubs deliver in 8.4 days.</li>
+                        <li><strong>SQL Architecture:</strong> Advanced <code>NTILE(5)</code> window functions and multi-table CTEs for cohort scoring.</li>
+                        <li><strong>Tableau Dashboard:</strong> Interactive regional choropleth maps and fulfillment delay tolerance simulation.</li>
+                    </ul>
+                </div>
+
+                <div class="project-actions" style="margin-top: 24px;">
+                    <a href="projects/ecommerce-revenue/index.html" target="_blank" class="btn btn-primary btn-sm">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                        Launch Interactive Dashboard ↗
+                    </a>
+                    <a href="https://github.com/ank-pal/ecommerce-revenue-segmentation" target="_blank" rel="noopener" class="btn btn-secondary-outline btn-sm">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        GitHub Repository
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Showcase Project 3: IPL Analytics -->
+        <article class="showcase-project-card animate-fade-up" data-category="ml sql">
+            <div class="showcase-visual-col">
+                <div class="showcase-main-img-box">
+                    <img id="showcaseImg3" src="assets/projects/ipl-analytics/rolling_chase_vs_toss.png" alt="IPL Toss Paradox">
+                </div>
+                <div class="showcase-thumbs">
+                    <button class="showcase-thumb-chip active" onclick="changeShowcaseImg('showcaseImg3', 'assets/projects/ipl-analytics/rolling_chase_vs_toss.png', this)">
+                        Toss vs Chase
+                    </button>
+                    <button class="showcase-thumb-chip" onclick="changeShowcaseImg('showcaseImg3', 'assets/projects/ipl-analytics/arima_runrate_forecast.png', this)">
+                        ARIMA Forecast
+                    </button>
+                    <button class="showcase-thumb-chip" onclick="changeShowcaseImg('showcaseImg3', 'assets/projects/ipl-analytics/phase_runrate_trajectories.png', this)">
+                        Phase Trajectories
+                    </button>
+                    <button class="showcase-thumb-chip" onclick="changeShowcaseImg('showcaseImg3', 'assets/projects/ipl-analytics/death_overs_strike_rate_kings.png', this)">
+                        Death Overs Kings
+                    </button>
+                </div>
+                <div class="code-snippet-box">
+                    -- Econometric Time-Series Stationarity Check &amp; ARIMA Ingestion<br>
+                    from statsmodels.tsa.stattools import adfuller<br>
+                    from statsmodels.tsa.arima.model import ARIMA<br>
+                    <br>
+                    adf_result = adfuller(phase_runrates.diff().dropna())<br>
+                    # p-value &lt; 0.01 confirms stationarity after d=1<br>
+                    model = ARIMA(phase_runrates, order=(1, 1, 1))<br>
+                    fitted = model.fit()<br>
+                    forecast = fitted.forecast(steps=5)
+                </div>
+            </div>
+            <div class="showcase-info-col">
+                <div>
+                    <span class="project-category-tag">Case Study 03 · Sports Econometrics &amp; Big Data</span>
+                    <h2 class="project-title" style="font-size: 1.5rem; margin-top: 4px;">IPL Sports Intelligence &amp; Econometric Time-Series (2008–2026)</h2>
+                    <p class="project-description" style="margin-top: 10px;">
+                        Processed <strong>283,000+ authentic CricSheet ball-by-ball deliveries</strong> across <strong>1,193 matches (18 seasons)</strong>. 
+                        Disproved conventional cricket punditry on toss advantage (eroded from 54.8% to 50.4% post-2016) and constructed stationary 
+                        <strong>Phase ARIMA models</strong> (&gt;85% accuracy) mapping the Impact Player scoring explosion (+1.85 RPO in overs 16–20).
+                    </p>
+
+                    <div class="showcase-metrics-grid">
+                        <div class="mini-stat">
+                            <span class="mini-stat-val text-accent-blue">283K+</span>
+                            <span class="mini-stat-label">Deliveries</span>
+                        </div>
+                        <div class="mini-stat">
+                            <span class="mini-stat-val text-accent-cyan">1,193</span>
+                            <span class="mini-stat-label">Matches</span>
+                        </div>
+                        <div class="mini-stat">
+                            <span class="mini-stat-val text-accent-purple">&gt;85%</span>
+                            <span class="mini-stat-label">ARIMA Acc</span>
+                        </div>
+                    </div>
+
+                    <ul class="showcase-meta-list">
+                        <li><strong>ARIMA Time-Series:</strong> ADF test verified stationarity ($p < 0.01$) with ACF/PACF optimal parameter order selection.</li>
+                        <li><strong>Database Architecture:</strong> SQLite relational schema indexed on match, batter, bowler, and over phase.</li>
+                        <li><strong>Phase Revolution:</strong> Quantified death overs run rate acceleration from 9.4 to 11.25+ RPO.</li>
+                        <li><strong>Tactical Intelligence:</strong> Complete records on all 15 historic tied Super Overs and player impact metrics across 788 players.</li>
+                    </ul>
+                </div>
+
+                <div class="project-actions" style="margin-top: 24px;">
+                    <a href="projects/ipl-analytics/index.html" target="_blank" class="btn btn-primary btn-sm">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                        Launch Interactive Dashboard ↗
+                    </a>
+                    <a href="https://github.com/ank-pal/ipl-timeseries-analytics" target="_blank" rel="noopener" class="btn btn-secondary-outline btn-sm">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        GitHub Repository
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Pipeline Flow Section -->
+        <section class="pipeline-flow-section animate-fade-up">
+            <div style="text-align: center;">
+                <span class="project-category-tag">Production Lifecycle</span>
+                <h2 style="font-size: 1.75rem; margin-top: 6px;">Modern Data Engineering &amp; Analytics Stack</h2>
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 8px auto 0; font-size: 0.95rem;">
+                    Every portfolio project follows this standardized enterprise analytics lifecycle from raw multi-source ingestion to C-suite decision models.
+                </p>
+            </div>
+            <div class="pipeline-steps-grid">
+                <div class="pipeline-step-card">
+                    <div class="pipeline-step-num">01</div>
+                    <h3 style="font-size: 1rem; margin-bottom: 6px;">Ingestion &amp; Schema</h3>
+                    <p style="font-size: 0.8125rem; color: var(--text-secondary);">Airbyte, Python, REST APIs, JSON parsing into relational schemas.</p>
+                </div>
+                <div class="pipeline-step-card">
+                    <div class="pipeline-step-num">02</div>
+                    <h3 style="font-size: 1rem; margin-bottom: 6px;">Validation &amp; Cleanse</h3>
+                    <p style="font-size: 0.8125rem; color: var(--text-secondary);">Pandas validation layers, null checks, outlier screening, and type enforcement.</p>
+                </div>
+                <div class="pipeline-step-card">
+                    <div class="pipeline-step-num">03</div>
+                    <h3 style="font-size: 1rem; margin-bottom: 6px;">Dimensional Modeling</h3>
+                    <p style="font-size: 0.8125rem; color: var(--text-secondary);">Kimball Star Schemas, surrogate keys, SQL CTEs, and window functions.</p>
+                </div>
+                <div class="pipeline-step-card">
+                    <div class="pipeline-step-num">04</div>
+                    <h3 style="font-size: 1rem; margin-bottom: 6px;">Statistical Modeling</h3>
+                    <p style="font-size: 0.8125rem; color: var(--text-secondary);">Scikit-Learn, ARIMA, stationarity tests, odds ratios, and hypothesis tests.</p>
+                </div>
+                <div class="pipeline-step-card">
+                    <div class="pipeline-step-num">05</div>
+                    <h3 style="font-size: 1rem; margin-bottom: 6px;">Executive BI &amp; Web</h3>
+                    <p style="font-size: 0.8125rem; color: var(--text-secondary);">Power BI DAX, Tableau, Plotly, and responsive HTML5 web apps.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <p>Designed &amp; built by <strong>Ankur Pal</strong> · Data Analyst · 2026</p>
+            <div style="display: flex; gap: 16px;">
+                <a href="index.html" style="color: var(--accent-blue); font-size: 0.875rem;">← Main Portfolio</a>
+                <a href="assets/resume/Ankur_Pal_Resume.pdf" target="_blank" style="color: var(--accent-blue); font-size: 0.875rem;">Download Resume (PDF)</a>
+                <a href="https://github.com/ank-pal" target="_blank" rel="noopener" style="color: var(--accent-blue); font-size: 0.875rem;">GitHub</a>
+                <a href="https://www.linkedin.com/in/ankur-pal-649001222/" target="_blank" rel="noopener" style="color: var(--accent-blue); font-size: 0.875rem;">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function changeShowcaseImg(imgId, newSrc, btnElement) {
+            const img = document.getElementById(imgId);
+            if (img) img.src = newSrc;
+            const parent = btnElement.parentElement;
+            if (parent) {
+                parent.querySelectorAll('.showcase-thumb-chip').forEach(b => b.classList.remove('active'));
+            }
+            btnElement.classList.add('active');
+        }
+
+        function filterShowcase(category, btnElement) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            const cards = document.querySelectorAll('.showcase-project-card');
+            cards.forEach(card => {
+                const cats = card.getAttribute('data-category') || '';
+                if (category === 'all' || cats.includes(category)) {
+                    card.style.display = 'grid';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
