@@ -214,10 +214,42 @@
     <nav class="nav scrolled" id="nav">
         <div class="nav-container">
             <a href="index.html" class="nav-logo" aria-label="Ankur Pal - Portfolio Home">
-                <span class="logo-terminal-badge">
-                    <svg class="logo-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="logo-cursor">_</span>
-                    <span class="logo-text">AP</span>
+                <span class="logo-3d-badge">
+                    <svg class="ap-3d-logo" viewBox="0 0 160 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="apA3dGradSh" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ffffff"/>
+                                <stop offset="55%" stop-color="#f1f5f9"/>
+                                <stop offset="100%" stop-color="#cbd5e1"/>
+                            </linearGradient>
+                            <linearGradient id="apP3dGradSh" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#67e8f9"/>
+                                <stop offset="35%" stop-color="#38bdf8"/>
+                                <stop offset="75%" stop-color="#0284c7"/>
+                                <stop offset="100%" stop-color="#1d4ed8"/>
+                            </linearGradient>
+                            <linearGradient id="apFacetLightSh" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45"/>
+                                <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.05"/>
+                            </linearGradient>
+                            <filter id="apGlowFilterSh" x="-20%" y="-20%" width="150%" height="150%">
+                                <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#38bdf8" flood-opacity="0.45"/>
+                                <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0284c7" flood-opacity="0.25"/>
+                            </filter>
+                        </defs>
+                        <g filter="url(#apGlowFilterSh)">
+                            <!-- Letter A: Sharp White Geometric Slash & Chevron -->
+                            <path d="M 6,88 L 68,6 L 71,13 L 71,92 L 56,76 L 56,48 L 24,88 Z" fill="url(#apA3dGradSh)"/>
+                            <!-- Letter P: Electric Blue Geometric Loop & Pointed Stem -->
+                            <path fill-rule="evenodd" d="M 77,6 L 127,6 L 151,31 L 127,56 L 93,56 L 93,76 L 85,99 L 77,88 Z M 93,20 L 122,20 L 133,31 L 122,42 L 93,42 Z" fill="url(#apP3dGradSh)"/>
+                            <!-- 3D Beveled Highlight Facet on P -->
+                            <path d="M 77,6 L 93,20 L 93,56 L 77,56 Z" fill="url(#apFacetLightSh)"/>
+                            <!-- Top Edge Lustre Highlight -->
+                            <path d="M 77,6 L 127,6 L 151,31 L 146,31 L 124,10 L 77,10 Z" fill="#ffffff" opacity="0.3"/>
+                        </g>
+                    </svg>
                 </span>
+                <span class="logo-brand-name">Ankur Pal<span class="logo-brand-dot">.</span></span>
             </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html#about">About</a></li>
