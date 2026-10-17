@@ -215,37 +215,56 @@
         <div class="nav-container">
             <a href="index.html" class="nav-logo" aria-label="Ankur Pal - Portfolio Home">
                 <span class="logo-3d-badge">
-                    <svg class="ap-3d-logo" viewBox="0 0 160 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="ap-3d-logo" viewBox="0 0 110 66" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <defs>
+                            <!-- Specular Metallic White Gradient for A -->
                             <linearGradient id="apA3dGradSh" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stop-color="#ffffff"/>
-                                <stop offset="55%" stop-color="#f1f5f9"/>
+                                <stop offset="55%" stop-color="#f8fafc"/>
                                 <stop offset="100%" stop-color="#cbd5e1"/>
                             </linearGradient>
+                            <!-- Electric Sapphire Blue Gradient for P -->
                             <linearGradient id="apP3dGradSh" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#67e8f9"/>
-                                <stop offset="35%" stop-color="#38bdf8"/>
-                                <stop offset="75%" stop-color="#0284c7"/>
-                                <stop offset="100%" stop-color="#1d4ed8"/>
+                                <stop offset="0%" stop-color="#3b82f6"/>
+                                <stop offset="35%" stop-color="#2563eb"/>
+                                <stop offset="85%" stop-color="#1d4ed8"/>
+                                <stop offset="100%" stop-color="#1e3a8a"/>
                             </linearGradient>
-                            <linearGradient id="apFacetLightSh" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45"/>
-                                <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.05"/>
+                            <!-- 3D Overlapping Fold Facet (Shadow & Depth) -->
+                            <linearGradient id="apFacetDepthSh" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#164eab" stop-opacity="0.95"/>
+                                <stop offset="100%" stop-color="#0f2b66" stop-opacity="0.8"/>
                             </linearGradient>
+                            <!-- Specular Top Edge Light -->
+                            <linearGradient id="apEdgeGleamSh" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+                                <stop offset="55%" stop-color="#93c5fd" stop-opacity="0.4"/>
+                                <stop offset="100%" stop-color="#60a5fa" stop-opacity="0"/>
+                            </linearGradient>
+                            <!-- Multi-tier 3D Glow Filter -->
                             <filter id="apGlowFilterSh" x="-20%" y="-20%" width="150%" height="150%">
-                                <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#38bdf8" flood-opacity="0.45"/>
-                                <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0284c7" flood-opacity="0.25"/>
+                                <feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-color="#2563eb" flood-opacity="0.55"/>
+                                <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#1d4ed8" flood-opacity="0.35"/>
                             </filter>
                         </defs>
                         <g filter="url(#apGlowFilterSh)">
-                            <!-- Letter A: Sharp White Geometric Slash & Chevron -->
-                            <path d="M 6,88 L 68,6 L 71,13 L 71,92 L 56,76 L 56,48 L 24,88 Z" fill="url(#apA3dGradSh)"/>
-                            <!-- Letter P: Electric Blue Geometric Loop & Pointed Stem -->
-                            <path fill-rule="evenodd" d="M 77,6 L 127,6 L 151,31 L 127,56 L 93,56 L 93,76 L 85,99 L 77,88 Z M 93,20 L 122,20 L 133,31 L 122,42 L 93,42 Z" fill="url(#apP3dGradSh)"/>
-                            <!-- 3D Beveled Highlight Facet on P -->
-                            <path d="M 77,6 L 93,20 L 93,56 L 77,56 Z" fill="url(#apFacetLightSh)"/>
-                            <!-- Top Edge Lustre Highlight -->
-                            <path d="M 77,6 L 127,6 L 151,31 L 146,31 L 124,10 L 77,10 Z" fill="#ffffff" opacity="0.3"/>
+                            <!-- 3D Base Extrusion for A -->
+                            <path d="M 4,55 L 17,55 L 37,29 L 39,46 L 48,55 L 48,13 L 46,5 Z" fill="#0f172a" opacity="0.6"/>
+                            <!-- Letter A: Specular White Slash & Vertical Column -->
+                            <path d="M 4,54 L 17,54 L 37,28 L 39,45 L 48,54 L 48,12 L 46,4 Z" fill="url(#apA3dGradSh)"/>
+                            <!-- Letter A Lustre Highlight Stroke -->
+                            <path d="M 4,54 L 46,4 L 47.5,7 L 17,54 Z" fill="#ffffff" opacity="0.4"/>
+
+                            <!-- 3D Base Extrusion for P -->
+                            <path fill-rule="evenodd" d="M 55,4 L 88,4 L 102,18 L 88,32 L 64,32 L 64,54 L 61,62 L 55,54 Z M 64,12 L 84,12 L 90,18 L 84,24 L 64,24 Z" fill="#0f172a" opacity="0.5"/>
+                            <!-- Letter P: Electric Cobalt Blue Monogram with Pointed Tip -->
+                            <path fill-rule="evenodd" d="M 55,3 L 88,3 L 102,17 L 88,31 L 64,31 L 64,53 L 61,61 L 55,53 Z M 64,11 L 84,11 L 90,17 L 84,23 L 64,23 Z" fill="url(#apP3dGradSh)"/>
+
+                            <!-- 3D Overlapping Fold Shadow (Signature Depth Effect) -->
+                            <path d="M 55,11 L 64,11 L 64,31 L 55,31 Z" fill="url(#apFacetDepthSh)"/>
+
+                            <!-- Specular Upper Edge Lustre on P Loop -->
+                            <path d="M 55,3 L 88,3 L 102,17 L 100,17 L 87,5 L 55,5 Z" fill="url(#apEdgeGleamSh)"/>
                         </g>
                     </svg>
                 </span>

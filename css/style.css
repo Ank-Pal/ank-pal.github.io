@@ -101,7 +101,7 @@ img {
 }
 
 /* ==========================================
-   3D Geometric Monogram Logo (Row 2, Col 1)
+   3D Geometric Monogram Logo (Custom AP)
    ========================================== */
 .nav-logo {
     display: inline-flex;
@@ -118,10 +118,10 @@ img {
     align-items: center;
     justify-content: center;
     padding: 6px 10px;
-    background: linear-gradient(135deg, rgba(14, 165, 233, 0.12) 0%, rgba(15, 23, 42, 0.9) 100%);
-    border: 1.6px solid rgba(56, 189, 248, 0.45);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.16) 0%, rgba(15, 23, 42, 0.94) 100%);
+    border: 1.6px solid rgba(59, 130, 246, 0.45);
     border-radius: 11px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.18);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -131,8 +131,8 @@ img {
 
 .ap-3d-logo {
     display: block;
-    width: 42px;
-    height: 28px;
+    width: 44px;
+    height: 26px;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     transform-style: preserve-3d;
 }
@@ -153,21 +153,22 @@ img {
     font-size: 1.35rem;
     line-height: 0;
     margin-left: 2px;
-    text-shadow: 0 0 8px rgba(6, 182, 212, 0.8);
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.9), 0 0 18px rgba(37, 99, 235, 0.6);
     display: inline-block;
+    transition: all 0.3s ease;
 }
 
 /* 3D Interactive Hover State */
 .nav-logo:hover .logo-3d-badge {
-    background: linear-gradient(135deg, rgba(14, 165, 233, 0.22) 0%, rgba(30, 41, 59, 0.95) 100%);
-    border-color: #38bdf8;
-    box-shadow: 0 10px 25px -4px rgba(56, 189, 248, 0.55), 0 0 20px rgba(56, 189, 248, 0.35), inset 0 0 10px rgba(56, 189, 248, 0.2);
-    transform: perspective(800px) rotateY(-14deg) rotateX(8deg) translateY(-2px) scale(1.05);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.28) 0%, rgba(30, 41, 59, 0.96) 100%);
+    border-color: #60a5fa;
+    box-shadow: 0 12px 30px -4px rgba(37, 99, 235, 0.65), 0 0 24px rgba(59, 130, 246, 0.45), inset 0 0 12px rgba(59, 130, 246, 0.25);
+    transform: perspective(800px) rotateY(-14deg) rotateX(8deg) translateY(-3px) scale(1.06);
 }
 
 .nav-logo:hover .ap-3d-logo {
-    filter: drop-shadow(0 6px 14px rgba(56, 189, 248, 0.85));
-    transform: translateZ(12px);
+    filter: drop-shadow(0 6px 16px rgba(37, 99, 235, 0.9));
+    transform: translateZ(14px);
 }
 
 .nav-logo:hover .logo-brand-name {
@@ -175,8 +176,8 @@ img {
 }
 
 .nav-logo:hover .logo-brand-dot {
-    text-shadow: 0 0 14px rgba(6, 182, 212, 1);
-    transform: scale(1.2);
+    text-shadow: 0 0 16px rgba(56, 189, 248, 1), 0 0 24px rgba(37, 99, 235, 0.85);
+    transform: scale(1.25);
 }
 
 @media (max-width: 480px) {
