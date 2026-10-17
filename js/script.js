@@ -330,7 +330,7 @@ const caseStudyData = {
         category: 'Ball-by-Ball Analytics · Phase ARIMA · Plotly Interactive',
         badge: '283K+ Balls · 1,193 Matches · Phase ARIMA',
         badgeClass: 'badge-sky',
-        liveUrl: 'projects/ipl-analytics/index.html',
+        liveUrl: 'https://ankur-pal-ipl-analytics.streamlit.app/',
         githubUrl: 'https://github.com/ank-pal/ipl-timeseries-analytics',
         stats: [
             { num: '283,000+', label: 'Ball-by-Ball Records' },
