@@ -193,6 +193,20 @@
             margin: 0 auto 12px;
             font-family: var(--font-mono);
         }
+        @media (max-width: 600px) {
+            .nav-portfolio-btn {
+                display: none;
+            }
+            .showcase-header-hero {
+                padding: 100px 0 36px;
+            }
+            .showcase-visual-col {
+                padding: 16px;
+            }
+            .showcase-main-img-box {
+                height: 220px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -210,12 +224,12 @@
                 <li><a href="index.html#skills">Skills</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
-            <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="nav-actions">
                 <a href="assets/resume/Ankur_Pal_Resume.pdf" target="_blank" class="btn btn-secondary btn-sm" style="padding: 8px 16px;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     Resume
                 </a>
-                <a href="index.html" class="btn btn-primary btn-sm">
+                <a href="index.html" class="btn btn-primary btn-sm nav-portfolio-btn">
                     ← Main Portfolio
                 </a>
             </div>
@@ -566,6 +580,22 @@
                 } else {
                     card.style.display = 'none';
                 }
+            });
+        }
+
+        // Mobile Menu Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    navToggle.classList.remove('active');
+                });
             });
         }
     </script>
