@@ -210,6 +210,8 @@
     </style>
 </head>
 <body>
+    <!-- Top Scroll Progress Bar -->
+    <div id="scrollProgress" class="scroll-progress-bar"></div>
     <!-- Navigation -->
     <nav class="nav scrolled" id="nav">
         <div class="nav-container">
@@ -651,7 +653,27 @@
                     navToggle.classList.remove('active');
                 });
             });
-        }
+        // Scroll Progress & Back to Top
+        const scrollProgress = document.getElementById('scrollProgress');
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        window.addEventListener('scroll', () => {
+            const total = document.documentElement.scrollHeight - window.innerHeight;
+            if (scrollProgress && total > 0) {
+                scrollProgress.style.width = `${(window.scrollY / total) * 100}%`;
+            }
+            if (backToTopBtn) {
+                if (window.scrollY > 400) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            }
+        }, { passive: true });
     </script>
+
+    <!-- Floating Back to Top Button -->
+    <button id="backToTopBtn" class="back-to-top-btn" aria-label="Back to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
 </body>
 </html>

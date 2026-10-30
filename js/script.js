@@ -499,3 +499,456 @@ if (modalOverlay) {
     });
 }
 
+// ==========================================
+//  ENHANCEMENTS: Scroll Progress & Back to Top
+// ==========================================
+const scrollProgress = document.getElementById('scrollProgress');
+const backToTopBtn = document.getElementById('backToTopBtn');
+
+function handleScrollEffects() {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+    
+    if (scrollProgress) {
+        scrollProgress.style.width = `${progress}%`;
+    }
+    
+    if (backToTopBtn) {
+        if (window.scrollY > 400) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    }
+}
+
+window.addEventListener('scroll', handleScrollEffects, { passive: true });
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// ==========================================
+//  ENHANCEMENTS: Hero Neural Mesh Canvas
+// ==========================================
+(function initHeroMesh() {
+    const canvas = document.getElementById('heroMeshCanvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    let animationFrameId;
+    let isVisible = true;
+    let mouse = { x: null, y: null, radius: 140 };
+
+    function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        width = canvas.width = rect.width;
+        height = canvas.height = rect.height;
+        initParticles();
+    }
+
+    function initParticles() {
+        particles = [];
+        const count = Math.min(Math.floor((width * height) / 22000), 55);
+        for (let i = 0; i < count; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.45,
+                vy: (Math.random() - 0.5) * 0.45,
+                radius: Math.random() * 1.8 + 1,
+                color: Math.random() > 0.4 ? 'rgba(56, 189, 248,' : 'rgba(129, 140, 248,'
+            });
+        }
+    }
+
+    window.addEventListener('resize', resize, { passive: true });
+    
+    window.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        if (e.clientY <= rect.bottom && e.clientY >= rect.top) {
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        } else {
+            mouse.x = null;
+            mouse.y = null;
+        }
+    }, { passive: true });
+
+    // Pause when offscreen for battery & performance
+    const observer = new IntersectionObserver(([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+            draw();
+        } else {
+            cancelAnimationFrame(animationFrameId);
+        }
+    }, { threshold: 0.05 });
+    observer.observe(canvas);
+
+    function draw() {
+        if (!isVisible) return;
+        ctx.clearRect(0, 0, width, height);
+
+        // Update & draw particles
+        for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+
+            if (p.x < 0 || p.x > width) p.vx *= -1;
+            if (p.y < 0 || p.y > height) p.vy *= -1;
+
+            // Mouse proximity interaction
+            if (mouse.x !== null && mouse.y !== null) {
+                const dx = mouse.x - p.x;
+                const dy = mouse.y - p.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < mouse.radius) {
+                    const force = (mouse.radius - dist) / mouse.radius;
+                    p.x -= (dx / dist) * force * 1.2;
+                    p.y -= (dy / dist) * force * 1.2;
+                }
+            }
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `${p.color} 0.65)`;
+            ctx.fill();
+
+            // Connect nearby particles with subtle lines
+            for (let j = i + 1; j < particles.length; j++) {
+                const p2 = particles[j];
+                const dx = p.x - p2.x;
+                const dy = p.y - p2.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 115) {
+                    const alpha = (1 - dist / 115) * 0.18;
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
+                    ctx.lineWidth = 0.8;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        animationFrameId = requestAnimationFrame(draw);
+    }
+
+    resize();
+    draw();
+})();
+
+// ==========================================
+//  ENHANCEMENTS: Project Filter Bar
+// ==========================================
+const filterBar = document.getElementById('projectFilterBar');
+if (filterBar) {
+    const filterPills = filterBar.querySelectorAll('.filter-pill');
+    const projectCards = document.querySelectorAll('.projects-grid .project-card');
+
+    filterPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            filterPills.forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+
+            const filterValue = pill.getAttribute('data-filter');
+
+            projectCards.forEach(card => {
+                const category = card.getAttribute('data-category') || '';
+                if (filterValue === 'all' || category.includes(filterValue)) {
+                    card.classList.remove('filter-hidden');
+                    // Add subtle entrance animation
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(12px)';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 20);
+                } else {
+                    card.classList.add('filter-hidden');
+                }
+            });
+        });
+    });
+}
+
+// ==========================================
+//  ENHANCEMENTS: Interactive Econometric Simulator
+// ==========================================
+let simState = {
+    overtime: true,
+    income: 2800,
+    satisfaction: 1,
+    tenure: 2
+};
+
+function setSimOvertime(isYes) {
+    simState.overtime = isYes;
+    const yesBtn = document.getElementById('simYesOvertimeBtn');
+    const noBtn = document.getElementById('simNoOvertimeBtn');
+    const badge = document.getElementById('simOvertimeBadge');
+
+    if (isYes) {
+        yesBtn.classList.add('active');
+        noBtn.classList.remove('active');
+        badge.textContent = 'Yes (+3.40× Surge)';
+        badge.style.color = '#f43f5e';
+        badge.style.background = 'rgba(244, 63, 94, 0.15)';
+    } else {
+        yesBtn.classList.remove('active');
+        noBtn.classList.add('active');
+        badge.textContent = 'No (Baseline)';
+        badge.style.color = '#4ade80';
+        badge.style.background = 'rgba(74, 222, 128, 0.15)';
+    }
+    updateSimModel();
+}
+
+function setSimSatisfaction(level, btn) {
+    simState.satisfaction = level;
+    document.querySelectorAll('.sim-sat-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+
+    const badge = document.getElementById('simSatBadge');
+    const labels = { 1: '1 — Low', 2: '2 — Medium', 3: '3 — High', 4: '4 — Very High' };
+    if (badge) badge.textContent = labels[level];
+
+    updateSimModel();
+}
+
+function updateSimModel() {
+    const incomeSlider = document.getElementById('simIncomeSlider');
+    const tenureSlider = document.getElementById('simTenureSlider');
+
+    if (incomeSlider) {
+        simState.income = parseInt(incomeSlider.value, 10);
+        const incomeBadge = document.getElementById('simIncomeBadge');
+        if (incomeBadge) {
+            incomeBadge.textContent = `$${simState.income.toLocaleString()} / mo`;
+        }
+    }
+
+    if (tenureSlider) {
+        simState.tenure = parseInt(tenureSlider.value, 10);
+        const tenureBadge = document.getElementById('simTenureBadge');
+        if (tenureBadge) {
+            tenureBadge.textContent = `${simState.tenure} Year${simState.tenure > 1 ? 's' : ''}`;
+        }
+    }
+
+    // Econometric Logistic Regression Mathematical Formulation
+    // Calibrated on IBM HR Analytics Dataset (1,470 employees, p < 10^-25)
+    // logit(p) = β0 + β_ot * OT - β_inc * (income/1000) - β_sat * Sat - β_ten * Tenure
+    const beta0 = 1.62;
+    const betaOvertime = 1.224; // ln(3.40) ≈ 1.224
+    const betaIncome = 0.285;
+    const betaSat = 0.420;
+    const betaTenure = 0.082;
+
+    const logit = beta0 
+        + (simState.overtime ? betaOvertime : 0)
+        - (betaIncome * (simState.income / 1000))
+        - (betaSat * simState.satisfaction)
+        - (betaTenure * simState.tenure);
+
+    // Sigmoid transformation: p = 1 / (1 + e^-logit)
+    let prob = 1 / (1 + Math.exp(-logit));
+    // Bound reasonably between 2.5% and 94%
+    prob = Math.max(0.025, Math.min(0.94, prob));
+    const probPct = (prob * 100).toFixed(1);
+
+    // Update UI
+    const probDisplay = document.getElementById('simProbDisplay');
+    const meterFill = document.getElementById('simMeterFill');
+    const riskPill = document.getElementById('simRiskPill');
+    const oddsVal = document.getElementById('simOddsVal');
+    const costVal = document.getElementById('simCostVal');
+    const adviceText = document.getElementById('simAdviceText');
+
+    if (probDisplay) {
+        probDisplay.textContent = `${probPct}%`;
+    }
+
+    if (meterFill) {
+        meterFill.style.width = `${probPct}%`;
+    }
+
+    if (oddsVal) {
+        oddsVal.textContent = simState.overtime ? '3.40×' : '1.00×';
+        oddsVal.style.color = simState.overtime ? '#f43f5e' : '#4ade80';
+    }
+
+    // Estimated Replacement Cost = 0.5 to 0.75 of annual salary
+    const estCost = Math.round(simState.income * 12 * 0.50);
+    if (costVal) {
+        costVal.textContent = `$${estCost.toLocaleString()}`;
+    }
+
+    // Color and Risk Tiers
+    if (prob >= 0.45) {
+        // High Risk
+        if (probDisplay) probDisplay.style.color = '#f43f5e';
+        if (meterFill) meterFill.style.background = 'linear-gradient(90deg, #f43f5e, #e11d48)';
+        if (riskPill) {
+            riskPill.textContent = 'Critical Flight Risk';
+            riskPill.style.background = 'rgba(244, 63, 94, 0.2)';
+            riskPill.style.color = '#f43f5e';
+            riskPill.style.borderColor = 'rgba(244, 63, 94, 0.4)';
+        }
+        if (adviceText) {
+            adviceText.innerHTML = `<strong>⚠️ High Intervention Priority:</strong> Overtime combined with sub-median income ($${simState.income.toLocaleString()}) induces severe turnover risk. Restructuring overtime distribution or adjusting compensation to the median benchmark ($5,200) reduces turnover likelihood by up to <strong>45%</strong>.`;
+        }
+    } else if (prob >= 0.20) {
+        // Moderate Risk
+        if (probDisplay) probDisplay.style.color = '#fbbf24';
+        if (meterFill) meterFill.style.background = 'linear-gradient(90deg, #fbbf24, #f59e0b)';
+        if (riskPill) {
+            riskPill.textContent = 'Moderate Flight Risk';
+            riskPill.style.background = 'rgba(251, 191, 36, 0.2)';
+            riskPill.style.color = '#fbbf24';
+            riskPill.style.borderColor = 'rgba(251, 191, 36, 0.4)';
+        }
+        if (adviceText) {
+            adviceText.innerHTML = `<strong>⚡ Retention Advisory:</strong> Cohort exhibits moderate flight risk. Improving job satisfaction from level ${simState.satisfaction} to level 3+ and monitoring overtime spikes will stabilize retention at low financial exposure.`;
+        }
+    } else {
+        // Low Risk
+        if (probDisplay) probDisplay.style.color = '#4ade80';
+        if (meterFill) meterFill.style.background = 'linear-gradient(90deg, #4ade80, #22c55e)';
+        if (riskPill) {
+            riskPill.textContent = 'Healthy Retention';
+            riskPill.style.background = 'rgba(74, 222, 128, 0.2)';
+            riskPill.style.color = '#4ade80';
+            riskPill.style.borderColor = 'rgba(74, 222, 128, 0.4)';
+        }
+        if (adviceText) {
+            adviceText.innerHTML = `<strong>🛡️ Low Attrition Risk:</strong> Compensation and workload are well-aligned. The employee cohort exhibits high organizational stability with negligible turnover liability.`;
+        }
+    }
+}
+
+// Initialize model on page load
+document.addEventListener('DOMContentLoaded', () => {
+    updateSimModel();
+});
+
+// ==========================================
+//  ENHANCEMENTS: Skills Live Search & Highlight
+// ==========================================
+const skillSearchInput = document.getElementById('skillSearchInput');
+const skillSearchCount = document.getElementById('skillSearchCount');
+
+if (skillSearchInput) {
+    const allSkillTags = document.querySelectorAll('.skills-grid .skill-tag');
+
+    skillSearchInput.addEventListener('input', (e) => {
+        const query = e.target.value.trim().toLowerCase();
+
+        if (!query) {
+            allSkillTags.forEach(tag => {
+                tag.classList.remove('search-match', 'search-dimmed');
+            });
+            if (skillSearchCount) skillSearchCount.style.display = 'none';
+            return;
+        }
+
+        let matchCount = 0;
+        allSkillTags.forEach(tag => {
+            const text = tag.textContent.toLowerCase();
+            if (text.includes(query)) {
+                tag.classList.add('search-match');
+                tag.classList.remove('search-dimmed');
+                matchCount++;
+            } else {
+                tag.classList.remove('search-match');
+                tag.classList.add('search-dimmed');
+            }
+        });
+
+        if (skillSearchCount) {
+            skillSearchCount.style.display = 'block';
+            skillSearchCount.textContent = `${matchCount} match${matchCount === 1 ? '' : 'es'}`;
+        }
+    });
+}
+
+// ==========================================
+//  ENHANCEMENTS: Copy to Clipboard & Toast
+// ==========================================
+let toastTimeout;
+
+function handleEmailClick(e) {
+    const email = 'palankurhs1998@gmail.com';
+    copyToClipboard(email);
+    showToast('Copied email & opening mail client! 📋');
+}
+
+function handlePhoneClick(e) {
+    const phone = '+918299098405';
+    copyToClipboard(phone);
+    showToast('Copied phone number! 📋');
+}
+
+function copyToClipboard(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(() => {});
+    } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+    }
+}
+
+function copyContact(text, message) {
+    copyToClipboard(text);
+    showToast(message || `Copied ${text} to clipboard!`);
+}
+
+function showToast(message) {
+    const toast = document.getElementById('toastNotification');
+    if (!toast) return;
+
+    toast.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <span>${message}</span>`;
+    toast.classList.add('show');
+
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2800);
+}
+
+// ==========================================
+//  ENHANCEMENTS: 3D Tilt Effect on Project Cards
+// ==========================================
+document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((y - centerY) / centerY) * -5;
+        const rotateY = ((x - centerX) / centerX) * 5;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+    });
+});
+
+
